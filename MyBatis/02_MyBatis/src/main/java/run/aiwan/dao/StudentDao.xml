@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="run.aiwan.dao.StudentDao">
+
+    <select id="selectStudents" resultType="run.aiwan.domain.Student">
+        select id,name,email,age from mybatis order by id
+    </select>
+
+    <insert id="insertStudent">
+        insert into mybatis values(#{id},#{name},#{email},#{age})
+    </insert>
+
+    <update id="updateStudent">
+        update mybatis set age = #{age} where id=#{id}
+    </update>
+
+    <delete id="deleteStudent">
+        delete from mybatis where id=#{studentId}
+    </delete>
+</mapper>
