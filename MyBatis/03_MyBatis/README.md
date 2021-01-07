@@ -88,3 +88,67 @@ resultType: 执行 sql 得到 ResultSet 转换的类型，使用类型的完全�
 </select>
 ```
 
+
+
+### ResultMap
+
+resultMap 可以自定义 sql 的结果和 java 对象属性的映射关系。更灵活的把列值赋值给指定属性。 常用在列名和 java 对象属性名不一样的情况。
+
+mapper文件
+
+```
+<!-- 创建 resultMap
+ id:自定义的唯一名称，在<select>使用
+ type:期望转为的 java 对象的全限定名称或别名
+-->
+<resultMap id="studentMap" type="com.bjpowernode.domain.Student">
+ <!-- 主键字段使用 id -->
+ <id column="id" property="id" />
+ <!--非主键字段使用 result-->
+ <result column="name" property="name"/>
+ <result column="email" property="email" />
+ <result column="age" property="age" />
+</resultMap>
+
+<!--resultMap: resultMap 标签中的 id 属性值-->
+<select id="selectUseResultMap" resultMap="studentMap">
+ select id,name,email,age from student where name=#{queryName} or
+age=#{queryAge}
+</select>
+```
+
+
+
+### typeAliases
+
+类型别名
+
+Mybatis 支持默认别名，我们也可以采用自定义别名方式来开发，主要使用在 mybatis.xml 主配置文件定义别名：
+
+- typeAlias
+- package
+
+```
+<typeAliases>
+ <!--
+ 定义单个类型的别名
+ type:类型的全限定名称
+ alias:自定义别名
+ -->
+ <typeAlias type="com.bjpowernode.domain.Student" alias="mystudent"/>
+ <!--
+ 批量定义别名，扫描整个包下的类，别名为类名（首字母大写或小写都可以）
+ name:包名
+ -->
+ <package name="com.bjpowernode.domain"/>
+ <package name="...其他包"/>
+</typeAliases>
+```
+
+mapper.xml
+
+```
+<select id="selectStudents" resultType="mystudent">
+ select id,name,email,age from student
+</select>
+```
