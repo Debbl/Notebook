@@ -152,3 +152,49 @@ mapper.xml
  select id,name,email,age from student
 </select>
 ```
+
+### 模糊 like
+- 例一
+
+接口方法：
+```
+List<Student> selectLikeFirst(String name);
+```
+mapper 文件
+```
+<select id="selectLikeFirst" resultType="com.bjpowernode.domain.Student">
+ select id,name,email,age from student
+ where name like #{studentName}
+</select>
+```
+测试方法
+```
+@Test
+public void testSelectLikeOne(){
+ String name="%李%";
+ List<Student> stuList = studentDao.selectLikeFirst(name);
+ stuList.forEach( stu -> System.out.println(stu));
+}
+```
+- 例二
+
+接口方法
+```
+List<Student> selectLikeSecond(String name);
+```
+mapper 文件
+```
+<select id="selectLikeSecond" resultType="com.bjpowernode.domain.Student">
+ select id,name,email,age from student
+ where name like "%" #{studentName} "%"
+</select>
+```
+测试方法
+```
+@Test
+public void testSelectLikeSecond(){
+ String name="李";
+ List<Student> stuList = studentDao.selectLikeSecond(name);
+ stuList.forEach( stu -> System.out.println(stu));
+}
+```
