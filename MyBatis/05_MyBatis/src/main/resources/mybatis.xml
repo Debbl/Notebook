@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--配置文件-->
+    <properties resource="jdbc.properties"></properties>
+
+    <!--settings：控制mybatis全局行为-->
+    <settings>
+        <!--设置mybatis输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <environments default="mydev">
+        <environment id="mydev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--数据库的驱动类名-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <!--连接数据库的url字符串-->
+                <property name="url" value="${jdbc.url}"/>
+                <!--访问数据库的用户名-->
+                <property name="username" value="${jdbc.username}"/>
+                <!--密码-->
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+
+    <!-- sql mapper(sql映射文件)的位置-->
+    <mappers>
+        <mapper resource="run/aiwan/dao/StudentDao.xml"/>
+    </mappers>
+</configuration>
