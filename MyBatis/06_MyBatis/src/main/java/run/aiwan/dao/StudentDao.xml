@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="run.aiwan.dao.StudentDao">
+    <!--sql-if-->
+    <select id="selectStudentIf" resultType="run.aiwan.domain.Student">
+        select id,name,email,age from mybatis where 1=1
+        <if test="age > 0">
+            and age > #{age}
+        </if>
+    </select>
+</mapper>
