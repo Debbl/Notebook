@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="run.aiwan.dao.StudentDao">
+<!--sql-if-->
+    <select id="selectStudentIf" resultType="run.aiwan.domain.Student">
+        select id,name,email,age from mybatis where 1=1
+        <if test="name != null and name !='' ">
+            and name = #{name}
+        </if>
+    </select>
+
+<!--sql-where-->
+    <select id="selectStudentWhere" resultType="run.aiwan.domain.Student">
+        select id,name,email,age from mybatis
+        <where>
+            <if test="name != null and name != '' ">
+                and name = #{name}
+            </if>
+        </where>
+    </select>
+
+<!--sql-foreach 简单类型-->
+    <select id="selectForeachOne" resultType="run.aiwan.domain.Student">
+        select * from mybatis where id in
+        <foreach collection="list" item="myid" open="(" close=")" separator=",">
+            #{myid}
+        </foreach>
+    </select>
+    
+<!--sql-foreach 对象类型-->
+    <select id="selectForeachTwo" resultType="run.aiwan.domain.Student">
+        select * from mybatis where id in
+        <foreach collection="list" item="stuList" open="(" close=")" separator=",">
+            #{stuList.id}
+        </foreach>
+    </select>
+
+<!--sql 代码片段-->
+    <sql id="studentSql">
+        select id,name,age,email from mybatis
+    </sql>
+    <select id="selectStudentSqlFragment" resultType="run.aiwan.domain.Student">
+        <include refid="studentSql"></include>
+        <if test="list != null and list.size > 0">
+            where id in
+            <foreach collection="list" item="stuList" open="(" close=")" separator=",">
+                #{stuList.id}
+            </foreach>
+        </if>
+    </select>
+</mapper>
