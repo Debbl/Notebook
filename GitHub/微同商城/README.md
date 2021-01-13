@@ -6,7 +6,7 @@ https://www.bilibili.com/video/bv1YK4y1W7oc
 
 ### 项目地址
 
-https://gitee.com/fuyang_lipengjun/platform.git
+https://gitee.com/fuyang_lipengjun/platform
 
 
 
