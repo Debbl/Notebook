@@ -1,13 +1,3 @@
-# 功能
-
-- ViewModel
-- LiveData
-- DateBinding
-- Localizationg
-- Orientation
-
-
-
 # Android中Button的Backgroud背景设置默认为蓝紫色，且无法修改的问题
 
 参考https://blog.csdn.net/qq_43417003/article/details/109786563
