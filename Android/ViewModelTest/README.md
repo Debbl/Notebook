@@ -11,8 +11,9 @@ implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
 ```
 
 然后写成
-myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
-
+```
+ myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
+```
 
 
 ## 官方文档
