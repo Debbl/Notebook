@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="school" class="run.aiwan.ba03.School">
+        <constructor-arg name="name" value="清华大学"/>
+        <constructor-arg name="address" value="北京的海淀区"/>
+    </bean>
+
+    <bean id="student" class="run.aiwan.ba03.Student">
+        <constructor-arg name="name" value="foo" />
+        <constructor-arg name="age" value="23" />
+        <constructor-arg name="school" ref="school" />
+    </bean>
+
+    <bean id="student1" class="run.aiwan.ba03.Student">
+        <constructor-arg name="name" value="bar" />
+        <constructor-arg name="age" value="21" />
+        <constructor-arg name="school" ref="school" />
+    </bean>
+</beans>

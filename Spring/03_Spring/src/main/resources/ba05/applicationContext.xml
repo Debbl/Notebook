@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!--    <bean id="student" class="run.aiwan.ba04.Student" autowire="byName">-->
+    <bean id="student" class="run.aiwan.ba05.Student" autowire="byType">
+        <property name="name" value="foo" />
+        <property name="age" value="21" />
+    </bean>
+
+    <bean id="primarySchool" class="run.aiwan.ba05.PrimarySchool">
+        <property name="name" value="清华大学" />
+        <property name="address" value="北京的海淀区" />
+    </bean>
+</beans>
