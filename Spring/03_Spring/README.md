@@ -16,7 +16,7 @@ set注入（设值注入） ：spring调用类的set方法， 你可以在set方
 
   > ba01
 
- ```
+ ```xml
 <bean id="xx" class="yyy">
     <property name="属性名字" value="此属性的值"/>
     一个property只能给一个属性赋值
@@ -27,7 +27,7 @@ set注入（设值注入） ：spring调用类的set方法， 你可以在set方
 
   > ba02
 
-```
+```xml
 <bean id="xx" class="yyy">
     <property name="属性名字" ref="bean的id"/>
 </bean>
