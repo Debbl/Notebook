@@ -1,6 +1,6 @@
 # Spring 事务
 
-> 07_Spring
+> 在07_Spring上添加
 
 ## 使用注解来实现事务
 
@@ -109,4 +109,12 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
 }
 
 ```
+
+## 注意
+
+事务失效的几种情况
+
+- 在针对事务的类中抛出RuntimeException异常，而不是抛出Exception
+- 不能在方法中使用try catch抛出异常，不然不会回滚
+- mysql默认存储引擎为MyISAM是不支持事务的， 需要设置为InnoDB模式
 
