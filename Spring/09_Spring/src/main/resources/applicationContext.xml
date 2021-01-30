@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--引入jdbc.properties文件-->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
+    <!--配置数据源连接数据库-->
+    <bean id="dateSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="clone">
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.passwd}" />
+        <property name="maxActive" value="${jdbc.max}" />
+    </bean>
+
+    <!--创建SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dateSource" />
+        <property name="configLocation" value="mybatis.xml" />
+    </bean>
+
+    <!--Spring帮助调用dao包下的getMapper方法-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="run.aiwan.dao" />
+    </bean>
+
+    <!--Service-->
+    <bean id="buyGoodsService" class="run.aiwan.service.impl.BuyGoodsServiceImpl">
+        <property name="goodsDao" ref="goodsDao" />
+        <property name="saleDao" ref="saleDao" />
+    </bean>
+
+    <!--spring的事务处理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dateSource" />
+    </bean>
+
+    <!--事务通知-->
+    <tx:advice id="myAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="buy" propagation="REQUIRED" isolation="DEFAULT"
+                       rollback-for="java.lang.NullPointerException, run.aiwan.exce.NotEnoughException"/>
+            <!--可以使用通配符，匹配多个方法-->
+            <tx:method name="add*" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!--配置增强器-->
+    <aop:config>
+        <aop:pointcut id="servicePt" expression="execution(* *..service..*.*(..))" />
+        <aop:advisor advice-ref="myAdvice" pointcut-ref="servicePt" />
+    </aop:config>
+</beans>
