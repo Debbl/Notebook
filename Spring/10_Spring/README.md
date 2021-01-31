@@ -243,18 +243,16 @@ result.jsp 注册成功
     <url-pattern>/reg</url-pattern>
   </servlet-mapping>
 
-
+  <!--监听器读取配置文件 默认applicationContext.xml-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring.xml</param-value>
+  </context-param>
   <!--监听器-->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <!--监听器读取配置文件-->
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
-  </context-param>
 </web-app>
-
 ```
 
 - ## 获取Spring容器对象
