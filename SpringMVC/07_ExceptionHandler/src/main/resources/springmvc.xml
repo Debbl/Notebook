@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--声明组件扫描器，通过IOC会自动创建包下的被注解(@Controller)的对象-->
+    <context:component-scan base-package="run.aiwan.controller" />
+
+    <!--视图解析器，因为*.jsp一般放在被保护的目录/WEB-INF/*下，可以少些文件目录的名称，实质是字符串的拼接-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前缀-->
+        <property name="prefix" value="/WEB-INF/view/" />
+        <!--后缀-->
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!--添加扫描器扫描handler包-->
+    <context:component-scan base-package="run.aiwan.handler" />
+    <mvc:annotation-driven />
+</beans>
