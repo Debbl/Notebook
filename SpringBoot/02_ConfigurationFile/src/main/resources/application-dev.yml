@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# 自定义配置文件
+student:
+  name: bar
+  age: 21
