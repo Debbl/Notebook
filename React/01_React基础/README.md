@@ -106,7 +106,7 @@ npx create-react-app my-app
 npm start
 ```
 
-3.3 npx 命令介绍
+npx 命令介绍
 
 - npm v5.2.0 引入的一条命令
 - 目的：提升包内提供的命令行工具的体验
