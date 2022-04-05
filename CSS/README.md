@@ -1,4 +1,4 @@
-# 1、 常见属性
+# 1. 常见属性
 ## 1.1 字体
 - `font-family`
 - `font-size`
@@ -139,3 +139,39 @@ div { color: red }
 
 ### 2.7.6 否定伪类（negation pseudo-classes）
 - :not()
+## 2.8 伪元素
+> `:` 或 `::` 推荐 `::`
+- ::first-line
+- ::first-letter
+- ::before
+- ::after
+> content 中可以使用 `url()` 引用图片
+```CSS
+.item::before {
+    content: url("./images/01.jpg");
+}
+```
+# 3. CSS 特性
+## 3.1 继承
+> 子元素会使用父元素的属性，继承的是**计算值不是设置值**
+- 默认继承
+    - color
+    - font-size
+    - font-family
+    - font-weight
+    - line-height
+    - text-align
+    - letter-spacing
+    - cursor
+    - ... 可以查阅文档
+- inherit 强制继承
+## 3.2 层叠
+> 相同的属性会覆盖，只有一个生效
+### 3.2.1 选择器的权重
+> 大概的值， 多个选择器可以通过算一下总值比大小，判定谁的权重大
+- !important 10000
+- 内联样式 1000
+- id选择器 100
+- 类选择器 10
+- 元素选择器 1
+- 通配选择器 0
